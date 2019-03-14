@@ -1,5 +1,3 @@
-FROM docker.sebastian-daschner.com/open-liberty:2
+FROM open-liberty:microProfile2-java8-ibm
 
-ENV JVM_ARGS="--add-opens java.base/java.net=ALL-UNNAMED"
-
-COPY target/maker-bot.war $DEPLOYMENT_DIR
+COPY target/maker-bot.war /opt/ol/wlp/usr/servers/defaultServer/dropins/

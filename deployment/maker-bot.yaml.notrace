@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: maker-bot
-        image: registry.ng.bluemix.net/journeys/maker-bot-trace:1
+        image: registry.ng.bluemix.net/journeys/maker-bot:1
         imagePullPolicy: Always
         livenessProbe:
           exec:

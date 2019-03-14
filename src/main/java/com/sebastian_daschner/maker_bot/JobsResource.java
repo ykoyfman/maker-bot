@@ -5,6 +5,10 @@ import javax.json.JsonObject;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.core.Context;
+import java.util.Enumeration;
+
 
 @Path("jobs")
 public class JobsResource {
@@ -13,7 +17,8 @@ public class JobsResource {
     MakerBot makerBot;
 
     @POST
-    public void createJob(JsonObject jsonObject) {
+    public void createJob(JsonObject jsonObject, @Context HttpServletRequest request) {
+		logHeaders(request);
         String instrument = jsonObject.getString("instrument", null);
 
         if (instrument == null)
@@ -22,4 +27,12 @@ public class JobsResource {
         makerBot.print(instrument);
     }
 
+    private void logHeaders(HttpServletRequest request) {
+        Enumeration<String> headerNames = request.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String header = headerNames.nextElement();
+            System.out.println(header + ": " + request.getHeader(header));
+        }
+        System.out.println();
+    }
 }
